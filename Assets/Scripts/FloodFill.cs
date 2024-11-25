@@ -16,7 +16,7 @@ public class FloodFill : MonoBehaviour
         FloodFillArea(colorGrid, startX, startY, targetColor, newColor);
     }
 
-
+    // opdracht: laat deze method werken
     private void FloodFillArea(ColorGrid colorGrid, int x, int y, Color targetColor, Color replacementColor)
     {
         
