@@ -11,8 +11,8 @@ public class InputHandler : MonoBehaviour
         Vector3 localPosition = transform.InverseTransformPoint(mousePosition);
         
         // we bepalen waar je in het grid klikt (welke pixel)
-        int x = Mathf.FloorToInt(localPosition.x / colorGrid.UnitSize);
-        int y = Mathf.FloorToInt(localPosition.y / colorGrid.UnitSize);
+        int x = Mathf.RoundToInt(localPosition.x / colorGrid.UnitSize);
+        int y = Mathf.RoundToInt(localPosition.y / colorGrid.UnitSize);
 
         floodFill.StartFloodFill(colorGrid, x, y, floodFill.ReplaceColor);
     }
