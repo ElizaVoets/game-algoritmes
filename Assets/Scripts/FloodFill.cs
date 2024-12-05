@@ -19,6 +19,26 @@ public class FloodFill : MonoBehaviour
     // opdracht: laat deze method werken
     private void FloodFillArea(ColorGrid colorGrid, int x, int y, Color targetColor, Color replacementColor)
     {
-        
+        if (x >= colorGrid.Width || x < 0 || y < 0 || y >= colorGrid.Height)
+        {
+            return;
+        }
+
+        Color currentColor = colorGrid.GetPixel(x, y);
+        if (currentColor != targetColor)
+        {
+            return;
+        }
+        if (currentColor == replacementColor)
+        {
+            return;
+        }
+
+        colorGrid.SetPixel(replacementColor, x, y);
+        FloodFillArea(colorGrid, x - 1, y, targetColor, replacementColor);
+        FloodFillArea(colorGrid, x + 1, y, targetColor, replacementColor);
+        FloodFillArea(colorGrid, x, y - 1, targetColor, replacementColor);
+        FloodFillArea(colorGrid, x, y + 1, targetColor, replacementColor);
     }
+
 }
