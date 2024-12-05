@@ -19,26 +19,28 @@ public class FloodFill : MonoBehaviour
     // opdracht: laat deze method werken
     private void FloodFillArea(ColorGrid colorGrid, int x, int y, Color targetColor, Color replacementColor)
     {
-        if (x >= colorGrid.Width || x < 0 || y < 0 || y >= colorGrid.Height)
-        {
+        // Stap 1: als de x en y niet 'binnen' de grid width en height liggen, return dan
+        if (x < 0 || x >= colorGrid.Width || y < 0 || y >= colorGrid.Height)
             return;
-        }
 
+        // Stap 2: Haal de huidige kleur van de tile op (deze x en y) en sla deze op in een variabele
         Color currentColor = colorGrid.GetPixel(x, y);
+
+        // Stap 3: Stop (return) als de currentColor niet overeenkomt met de targetColor
         if (currentColor != targetColor)
-        {
             return;
-        }
+
+        // Stap 4: Stop (return) als de huidige kleur al de replacementColor is
         if (currentColor == replacementColor)
-        {
             return;
-        }
 
+        // Stap 5: Verander de kleur van de huidige tile (colorGrid heeft een SetPixel functie)
         colorGrid.SetPixel(replacementColor, x, y);
-        FloodFillArea(colorGrid, x - 1, y, targetColor, replacementColor);
-        FloodFillArea(colorGrid, x + 1, y, targetColor, replacementColor);
-        FloodFillArea(colorGrid, x, y - 1, targetColor, replacementColor);
-        FloodFillArea(colorGrid, x, y + 1, targetColor, replacementColor);
-    }
 
+        // Stap 6: Roep deze functie ook recursief aan voor aangrenzende tiles
+        FloodFillArea(colorGrid, x + 1, y, targetColor, replacementColor); // Rechts
+        FloodFillArea(colorGrid, x - 1, y, targetColor, replacementColor); // Links
+        FloodFillArea(colorGrid, x, y + 1, targetColor, replacementColor); // Boven
+        FloodFillArea(colorGrid, x, y - 1, targetColor, replacementColor); // Onder
+    }
 }
